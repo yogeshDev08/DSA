@@ -1,0 +1,14 @@
+.main_container {
+    display: inline-grid;
+}
+
+.sub_container {
+    display: inline-flex;
+    align-items: center;
+}
+
+.title {
+    font-family: cursive;
+    font-size: x-large;
+    font-weight: 700;
+}

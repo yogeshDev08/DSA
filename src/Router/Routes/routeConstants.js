@@ -1,14 +1,21 @@
 import { lazy } from "react"
 
-const Login = lazy(() => import("../../Pages/Authentication/Login"))
+const Home = lazy(() => import("../../Components/MainFeed"))
+const Profile = lazy(() => import("../../Components/Profile/UserProfile"))
+const Login = lazy(() => import("../../Pages/Authentication/LoginForm"))
 
 const Routes = [
     {
+        path: "/",
+        element: <Home />,
+    },
+    {
         path: "/login",
         element: <Login />,
-        meta: {
-            layout: "blank"
-        }
+    },
+    {
+        path: "/profile",
+        element: <Profile />,
     }
 ]
 

@@ -1,133 +1,72 @@
 import { Button, Card, CardContent, Input } from "@mui/material"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import Avatar from '@mui/material/Avatar';
+import { useDispatch, useSelector } from "react-redux";
+import { getAllData } from "../../Pages/Authentication/ownStore";
+import axios from "axios";
 
-const data = [
-    {
-        "title": "ctions 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the the",
-        "name": "Coder",
-        "data": "16-1-2023"
-    },
-    {
-        "title": "has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable Englis",
-        "name": "Coder",
-        "data": "16-1-2023"
-    },
-    {
-        "title": " majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a",
-        "name": "Coder",
-        "data": "16-1-2023"
-    },
-    {
-        "title": "in words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 ",
-        "name": "Coder",
-        "data": "16-1-2023"
-    },
-    {
-        "title": " centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was po",
-        "name": "Coder",
-        "data": "16-1-2023"
-    },
-    {
-        "title": "tters, as opposed to using 'Content here, content here', making it look li",
-        "name": "Coder",
-        "data": "16-1-2023"
-    }, {
-        "title": "ctions 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the the",
-        "name": "Coder",
-        "data": "16-1-2023"
-    },
-    {
-        "title": "has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable Englis",
-        "name": "Coder",
-        "data": "16-1-2023"
-    },
-    {
-        "title": " majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a",
-        "name": "Coder",
-        "data": "16-1-2023"
-    },
-    {
-        "title": "in words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 ",
-        "name": "Coder",
-        "data": "16-1-2023"
-    },
-    {
-        "title": " centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was po",
-        "name": "Coder",
-        "data": "16-1-2023"
-    },
-    {
-        "title": "tters, as opposed to using 'Content here, content here', making it look li",
-        "name": "Coder",
-        "data": "16-1-2023"
-    },
-    {
-        "title": "has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable Englis",
-        "name": "Coder",
-        "data": "16-1-2023"
-    },
-    {
-        "title": " majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a",
-        "name": "Coder",
-        "data": "16-1-2023"
-    },
-    {
-        "title": "in words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 ",
-        "name": "Coder",
-        "data": "16-1-2023"
-    }
-]
-const HomePage = () => {
-    const [value, setValue] = useState("")
-    const [list, setList] = useState(data)
-
-    const handleAdd = () => {
-        const date = new Date()
-        setList([{
-            title: value,
-            name: "Coder",
-            data: `${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`
-        }, ...list])
-        setValue("")
-    }
+function TwitteCard({ item }) {
     return (
-        <ul>
-            <Card style={{ backgroundColor: "#AAB8C2", maxWidth: "30%", position: "relative", left: "36%" }}>
-                <div style={{ display: "flex", justifyContent: "center" }}>
-                    <h1>Fweeter</h1>
-                </div>
-                <CardContent >
-                    <div style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center"
-                    }}>
-                        <Input style={{ backgroundColor: "#657786", marginRight: "2%", padding: "2%", width: "100%" }} value={value} onChange={(e) => setValue(e.target.value)} />
-                        <Button variant="contained" onClick={handleAdd}>Add</Button>
-
+        <Card style={{ backgroundColor: "#E1E8ED", marginTop: "2%" }}>
+            <CardContent>
+                <div className="user_container">
+                    <Avatar alt="Remy Sharp" sx={{ marginRight: "5%" }} />
+                    <div >
+                        <h3 className="name"> {item?.user?.name} </h3>
+                        <h5 className="name">{item?.user?.username}</h5>
                     </div>
-                    {list.map((item, index) => (
-                        <Card key={index} style={{ backgroundColor: "#E1E8ED", marginTop: "2%" }}>
-                            <CardContent>
-                                <div>
-                                    <h4> {item.title} </h4>
-                                    <div style={{
-                                        display: "flex",
-                                        justifyContent: "space-between",
-                                        alignItems: "center"
-                                    }}>
-                                        <h6> {item.name} </h6>
-                                        <span> {item.data} </span>
-                                    </div>
-                                </div>
-                            </CardContent>
-                        </Card>
-                    ))
-                    }
-                </CardContent>
-            </Card>
-        </ul >
+                </div>
+
+                <div className="tweet_container">
+                    <span className="tweet_span"> {item?.content} </span>
+                    <div className="user_action_container">
+                        {item?.createdAt.split('T')[0]}
+                    </div>
+                </div>
+            </CardContent>
+        </Card>
     )
 }
 
-export default HomePage
+const MainTweeterFeed = () => {
+    const [value, setValue] = useState("")
+    const [list, setList] = useState([])
+    const dispatch = useDispatch()
+    const storeData = useSelector(state => state?.mainFeed?.allData)
+    const userData = useSelector(state => state?.mainFeed?.userData)
+    const handleAdd = async () => {
+        if (value) {
+            const res = await axios.post("http://172.16.11.18:5000/fweets/", { content: value, user: userData.id })
+            if (res.status === 200) {
+                dispatch(getAllData())
+            }
+            setValue("")
+        }
+    }
+
+    useEffect(() => {
+        if (storeData.length > 0) {
+            setList(storeData)
+        }
+    }, [storeData])
+
+    useEffect(() => {
+        dispatch(getAllData())
+    }, [])
+    return (
+        <Card className="centerContainer">
+            <CardContent >
+                <div className="feed_container">
+                    <Input placeholder="lets tweet" className="search_Input" disableUnderline={true} value={value} onChange={(e) => setValue(e.target.value)} />
+                    <Button variant="contained" onClick={handleAdd}>Add</Button>
+                </div>
+                {list.map((item, index) => (
+                    <TwitteCard item={item} key={index} />
+                ))
+                }
+            </CardContent>
+        </Card>
+    )
+}
+
+export default MainTweeterFeed

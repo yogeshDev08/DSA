@@ -1,20 +1,14 @@
-.main {
-    background-color: #657786;
-}
-
-.action_area {
-    display: flex;
+.main_login_container{
+    display: grid;
     justify-content: center;
+    margin-top: 1%;
 }
 
-.nav_title{
-    margin-right: 1% ;   
-    font-size: large; 
-    font-weight: lighter;
-    font-family: sans-serif;
-}
-
-.header {
-    display: block;
-    align-items: center;
+.form_inpit {
+    background-color: #6066ac;
+    margin-right: 2%;
+    padding: 2%;
+    width: 100%;
+    border-radius: 25px;
+    color: white;
 }

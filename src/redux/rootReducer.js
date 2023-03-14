@@ -1,5 +1,5 @@
 // ** Reducers Imports
-import ownStore from "../Pages/Authentication/ownStore"
-const rootReducer = { ownStore }
+import mainFeed from "../Pages/Authentication/ownStore"
+const rootReducer = { mainFeed }
 
 export default rootReducer
